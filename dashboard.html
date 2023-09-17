@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+
+</head>
+<body>
+
+    <meta id="redirectshop" http-equiv="refresh" content="">
+
+<script>
+            var url = window.location.href;
+
+var urlObj = new URL(url);
+
+var plan = urlObj.searchParams.get("pl");
+if(plan == "Premium"){
+      window.onload = () => {
+    const fragment = new URLSearchParams(window.location.hash.slice(1));
+    const [accessToken, tokenType] = [fragment.get('access_token'), fragment.get('token_type')];
+
+    if (!accessToken) {
+        window.location.href('/')
+    }
+
+    fetch('https://discord.com/api/users/@me', {
+    headers: {
+        authorization: `${tokenType} ${accessToken}`,
+    },
+    })
+    .then(result => result.json())
+    .then(response => {
+        console.log(response);
+        const { username, discriminator, avatar, id} = response;
+        //document.getElementById('name').innerText = ` ${username}#${discriminator}`;
+        document.getElementById("redirectshop").content = `0; url=https://buy.stripe.com/dR65l32pY96JfvOeUU?client_reference_id=${id}`;
+        //document.getElementById("avatar").src = `https://cdn.discordapp.com/avatars/${id}/${avatar}.jpg`;
+    })
+    .catch(console.error);
+
+
+};
+}
+
+if(plan == "Ultra"){
+    window.onload = () => {
+    const fragment = new URLSearchParams(window.location.hash.slice(1));
+    const [accessToken, tokenType] = [fragment.get('access_token'), fragment.get('token_type')];
+
+    if (!accessToken) {
+        window.location.href('/')
+    }
+
+    fetch('https://discord.com/api/users/@me', {
+    headers: {
+        authorization: `${tokenType} ${accessToken}`,
+    },
+    })
+    .then(result => result.json())
+    .then(response => {
+        console.log(response);
+        const { username, discriminator, avatar, id} = response;
+        //document.getElementById('name').innerText = ` ${username}#${discriminator}`;
+        document.getElementById("redirectshop").content = `0; url=https://buy.stripe.com/28ofZH8Omgzb83m145?client_reference_id=${id}`;
+        //document.getElementById("avatar").src = `https://cdn.discordapp.com/avatars/${id}/${avatar}.jpg`;
+    })
+    .catch(console.error);
+
+
+};
+}
+
+</script>
+</body>
+</html>
